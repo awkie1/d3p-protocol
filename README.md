@@ -141,3 +141,15 @@ SDK coming soon: `pip install d3p-sdk`
 ## License
 
 MIT
+
+
+## Test Your Agent
+
+labs.digital3.ai is a free sandbox. Your agent can:
+- Discover services: POST /api/discover/query
+- Check compatibility: POST /api/services/check-compatibility
+- Call any service: 10 free calls/hr, no signup
+- Switch to Lightning for unlimited access
+
+Bring your agent. See what it can do.
+
