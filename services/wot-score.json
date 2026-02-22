@@ -1,0 +1,71 @@
+{
+  "@context": {
+    "d3p": "https://digital3.ai/protocol/v1#",
+    "schema": "https://schema.org/"
+  },
+  "@type": "d3p:Service",
+  "d3p:serviceId": "wot-score",
+  "d3p:capabilityCategory": "oracle",
+  "d3p:name": "Nostr Web of Trust Score",
+  "d3p:description": "Returns trust/reputation score for any Nostr pubkey based on the Web of Trust graph. Useful for spam filtering, reputation ranking, and trust signals in agent-to-agent interactions.",
+  "d3p:inputSchema": {
+    "type": "object",
+    "properties": {
+      "pubkey": {
+        "type": "string",
+        "description": "Nostr pubkey in hex format"
+      }
+    },
+    "required": ["pubkey"]
+  },
+  "d3p:outputSchema": {
+    "type": "object",
+    "properties": {
+      "score": {
+        "type": "number",
+        "description": "Web of Trust score from -1 (blocked) to 1 (trusted)"
+      },
+      "followers": {
+        "type": "integer",
+        "description": "Number of followers in the WoT"
+      },
+      "reactions": {
+        "type": "integer",
+        "description": "Total reactions/approvals from WoT"
+      },
+      "found": {
+        "type": "boolean",
+        "description": "Whether the pubkey was found in the WoT"
+      },
+      "graph_size": {
+        "type": "integer",
+        "description": "Total nodes in the WoT graph"
+      }
+    },
+    "required": ["score", "found", "graph_size"]
+  },
+  "d3p:pricing": {
+    "base_price_sats": 100,
+    "model": "fixed"
+  },
+  "d3p:l402Endpoint": "https://maximumsats.com/api/l402-auth-build",
+  "d3p:endpoint": "https://wot.klabo.world/score",
+  "d3p:latencyProfile": {
+    "p50_ms": 200,
+    "p95_ms": 500,
+    "p99_ms": 1000
+  },
+  "d3p:composabilityTags": ["oracle", "reputation", "trust", "spam-filter", "identity"],
+  "d3p:example": {
+    "request": {
+      "pubkey": "32e182763e0a1b1f20baa4210e1f220c5a082d9a8453c9169bcf0eb0acf95c10"
+    },
+    "response": {
+      "score": 0.38,
+      "followers": 245,
+      "reactions": 892,
+      "found": true,
+      "graph_size": 52075
+    }
+  }
+}
